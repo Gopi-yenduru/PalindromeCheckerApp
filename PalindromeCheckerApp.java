@@ -20,7 +20,10 @@ public class UseCase7PalindromeCheckerApp {
         boolean isPalindrome = true;
 
         while (deque.size() > 1) {
-            if (!deque.removeFirst().equals(deque.removeLast())) {
+            char first = deque.removeFirst();
+            char last = deque.removeLast();
+
+            if (first != last) {
                 isPalindrome = false;
                 break;
             }
