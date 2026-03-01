@@ -1,35 +1,54 @@
 import java.util.Scanner;
+import java.util.Stack;
 
-public class UseCase9PalindromeCheckerApp {
+// Palindrome Service Class (Encapsulated Logic)
+class PalindromeChecker {
 
-    // Recursive method to check palindrome
-    public static boolean isPalindrome(String str, int start, int end) {
+    // Public method to check palindrome
+    public boolean checkPalindrome(String input) {
 
-        // Base Condition: If start index crosses end index
-        if (start >= end) {
-            return true;
-        }
-
-        // If characters at start and end are not equal
-        if (str.charAt(start) != str.charAt(end)) {
+        if (input == null) {
             return false;
         }
 
-        // Recursive call for next inner characters
-        return isPalindrome(str, start + 1, end - 1);
+        // Normalize string (ignore spaces and case)
+        String processed = input.replaceAll("\\s+", "").toLowerCase();
+
+        Stack<Character> stack = new Stack<>();
+
+        // Push all characters into stack
+        for (char ch : processed.toCharArray()) {
+            stack.push(ch);
+        }
+
+        // Compare original string with stack (reverse order)
+        for (char ch : processed.toCharArray()) {
+            if (ch != stack.pop()) {
+                return false;
+            }
+        }
+
+        return true;
     }
+}
+
+// Main Application Class
+public class UseCase11PalindromeCheckerApp {
 
     public static void main(String[] args) {
 
         Scanner scanner = new Scanner(System.in);
 
-        System.out.println("===== UC9: Recursive Palindrome Checker =====");
+        System.out.println("===== UC11: Object-Oriented Palindrome Checker =====");
         System.out.print("Enter a string: ");
 
         String input = scanner.nextLine();
 
-        // Remove spaces and convert to lowercase
-        String processedInput = input.replaceAll("\\s+", "").toLowerCase();
+        // Create service object
+        PalindromeChecker checker = new PalindromeChecker();
+
+        // Call encapsulated method
+        boolean result = checker.checkPalindrome(input);
 
         if (result) {
             System.out.println("Result: The given string is a Palindrome.");
