@@ -1,38 +1,47 @@
 import java.util.Scanner;
-import java.util.Deque;
-import java.util.LinkedList;
 
-public class UseCase7PalindromeCheckerApp {
+public class UseCase10PalindromeCheckerApp {
+
+    // Method to check palindrome (iterative approach)
+    public static boolean isPalindrome(String str) {
+
+        int left = 0;
+        int right = str.length() - 1;
+
+        while (left < right) {
+
+            if (str.charAt(left) != str.charAt(right)) {
+                return false;
+            }
+
+            left++;
+            right--;
+        }
+
+        return true;
+    }
 
     public static void main(String[] args) {
 
         Scanner scanner = new Scanner(System.in);
 
-        System.out.println("Enter a string to check if it is a palindrome:");
+        System.out.println("===== UC10: Case-Insensitive & Space-Ignored Palindrome Checker =====");
+        System.out.print("Enter a string: ");
+
         String input = scanner.nextLine();
 
-        Deque<Character> deque = new LinkedList<>();
+        // Step 1: Normalize string
+        // Remove all spaces using regular expression and convert to lowercase
+        String normalizedInput = input.replaceAll("\\s+", "").toLowerCase();
 
-        for (int i = 0; i < input.length(); i++) {
-            deque.addLast(input.charAt(i));
-        }
+        // Step 2: Apply palindrome logic
+        boolean result = isPalindrome(normalizedInput);
 
-        boolean isPalindrome = true;
-
-        while (deque.size() > 1) {
-            char first = deque.removeFirst();
-            char last = deque.removeLast();
-
-            if (first != last) {
-                isPalindrome = false;
-                break;
-            }
-        }
-
-        if (isPalindrome) {
-            System.out.println("The string \"" + input + "\" is a palindrome.");
+        // Display result
+        if (result) {
+            System.out.println("Result: The given string is a Palindrome (ignoring spaces and case).");
         } else {
-            System.out.println("The string \"" + input + "\" is not a palindrome.");
+            System.out.println("Result: The given string is NOT a Palindrome.");
         }
 
         scanner.close();
