@@ -31,9 +31,6 @@ public class UseCase9PalindromeCheckerApp {
         // Remove spaces and convert to lowercase
         String processedInput = input.replaceAll("\\s+", "").toLowerCase();
 
-        // Call recursive method
-        boolean result = isPalindrome(processedInput, 0, processedInput.length() - 1);
-
         if (result) {
             System.out.println("Result: The given string is a Palindrome.");
         } else {
